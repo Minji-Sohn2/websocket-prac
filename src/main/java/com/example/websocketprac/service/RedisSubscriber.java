@@ -1,4 +1,4 @@
-package com.example.websocketprac.config;
+package com.example.websocketprac.service;
 
 import com.example.websocketprac.dto.ChatMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,6 @@
 package com.example.websocketprac.repository;
 
-import com.example.websocketprac.config.RedisSubscriber;
+import com.example.websocketprac.service.RedisSubscriber;
 import com.example.websocketprac.dto.ChatRoom;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;

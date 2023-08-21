@@ -1,15 +1,12 @@
 package com.example.websocketprac.controller;
 
-import com.example.websocketprac.config.RedisPublisher;
+import com.example.websocketprac.service.RedisPublisher;
 import com.example.websocketprac.dto.ChatMessage;
 import com.example.websocketprac.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /*
     publisher 구현 (WebSocketChatHandler -> ChatController)
