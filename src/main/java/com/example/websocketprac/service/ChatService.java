@@ -30,7 +30,7 @@ public class ChatService {
     /**
      * 모든 채팅방 조회
      *
-     * @return
+     * @return 채팅방 list
      */
     public List<ChatRoom> findAllRoom() {
         return new ArrayList<>(chatRooms.values());
