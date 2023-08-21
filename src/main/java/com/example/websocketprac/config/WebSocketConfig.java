@@ -1,21 +1,26 @@
 package com.example.websocketprac.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration
-@EnableWebSocket            // Websocket 활성화
-@RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer {
+@EnableWebSocketMessageBroker
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    private final WebSocketChatHandler webSocketChatHandler;
+    // pub/sub 메세징 구현
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        config.enableSimpleBroker("/sub");  // 메세지 구독 요청
+        config.setApplicationDestinationPrefixes("/pub");   // 메세지 발행 요청
+    }
 
     @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketChatHandler, "/ws/chat")   // websocket에 접속하기 위한 endpoint
-                .setAllowedOrigins("*");    // CORS - 도메인이 다른 서버에서도 접속 가능하도록
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/ws-stomp")   // Stomp websocket 연결 endpoint
+                .setAllowedOriginPatterns("*")
+                .withSockJS();
     }
 }
